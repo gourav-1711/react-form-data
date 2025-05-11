@@ -27,18 +27,18 @@ export default function Table() {
 
     // user delete
     let userDel = (id) => {
-        // console.log(id);
-        // axios.delete(`https://form-backend-by-py.onrender.com/api/website/user/single-user-delete/${id}`)
-        //     .then((ress) => {
-        //         console.log(ress);
-        //         toast.success("user deleted succesfully")
+        console.log(id);
+        axios.delete(`https://form-backend-by-py.onrender.com/api/website/user/single-user-delete/${id}`)
+            .then((ress) => {
+                console.log(ress);
+                toast.success("user deleted succesfully")
 
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
+            })
+            .catch((err) => {
+                console.log(err);
 
-        //     })
-        // console.log(id);
+            })
+        console.log(id);
 
     }
 
