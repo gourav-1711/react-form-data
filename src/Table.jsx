@@ -302,6 +302,10 @@ let ModalDiv = ({ value, setModal, modal }) => {
             .then((ress) => {
                 console.log(ress);
                 toast.success("user edited")
+
+                setTimeout(()=>{
+                    setModal(false)
+                },2000)
             })
             .catch((err) => {
                 console.log(err);
