@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 export default function Table() {
 
@@ -117,6 +117,7 @@ export default function Table() {
 
     return (
         <>
+            <ToastContainer />
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[100%] mx-auto p-3">
                 <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white ">
@@ -230,7 +231,7 @@ export default function Table() {
                                                 {v.contact}
                                             </td>
                                             <td className="">
-                                                <div className="flex items-center">
+                                                <div className="flex items-center w-36">
                                                     {
                                                         v.address
                                                     }
@@ -263,7 +264,7 @@ export default function Table() {
                 {/* modal  */}
 
                 {modal &&
-                    <ModalDiv value={modalData} />}
+                    <ModalDiv value={modalData} setModal={setModal} modal={modal} />}
 
             </div>
 
@@ -271,12 +272,10 @@ export default function Table() {
     )
 }
 
-let ModalDiv = ({ value }) => {
-    let [modal, setModal] = useState()
+let ModalDiv = ({ value, setModal, modal }) => {
 
 
 
-    // console.log(value);
 
 
     // edit function
@@ -302,6 +301,7 @@ let ModalDiv = ({ value }) => {
         axios.put(`https://form-backend-by-py.onrender.com/api/website/user/update-user/${value._id}`, editObj)
             .then((ress) => {
                 console.log(ress);
+                toast.success("user edited")
             })
             .catch((err) => {
                 console.log(err);
@@ -310,7 +310,9 @@ let ModalDiv = ({ value }) => {
 
     return (
         <>
-            <div id="editUserModal" tabIndex="-1" className={` ${modal ? "" : ""} fixed top-0 left-0 right-0 z-50 items-center justify-center  w-full overflow-y-scroll  md:inset-0 `}>
+            <ToastContainer />
+
+            <div id="editUserModal" tabIndex="-1" className={` ${modal ? "block" : "hidden"} fixed top-0 left-0 right-0 z-50 items-center justify-center  w-full overflow-y-scroll  md:inset-0 `}>
                 <div
                     onClick={() => setModal(false)}
                     className="z-50 cursor-pointer font-bold text-2xl absolute top-10 left-[75%] md:left-[65%] ">
